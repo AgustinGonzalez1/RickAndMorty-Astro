@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+import type { Character } from "../types/types";
+
+const data = await fetch("https://rickandmortyapi.com/api/character?page=1").then((res) => res.json());
+---
+
+<Layout title="Welcome to Astro.">
+	{
+		data.results.map((character: Character) => (
+			<a href={`/character/${character.id}`}>
+				<p>{character.name}</p>
+			</a>
+		))
+	}
+</Layout>
