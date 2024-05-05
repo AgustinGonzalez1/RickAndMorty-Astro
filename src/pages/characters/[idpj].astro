@@ -13,7 +13,7 @@ export const getStaticPaths = async () => {
 
 	const data = await response.json();
 
-	const totalPages = data.info.pages;
+	const totalPages = data.info.count;
 
 	const paths = Array.from({ length: totalPages }, (_, index) => ({
 		params: { idpj: (index + 1).toString() },
@@ -25,7 +25,7 @@ export const getStaticPaths = async () => {
 
 <Layout title={data.name}>
 	<div>
-		<h1>{data.name}</h1>
 		<img src={data.image} transition:name=`card-${data.id}` />
+		<h2 class="text-4xl text-center">{data.name}</h2>
 	</div>
 </Layout>
