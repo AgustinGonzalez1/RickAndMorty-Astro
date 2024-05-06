@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import type { Character } from "../../types/types";
+import Card from "../../components/Card.astro";
+import Paginate from "../../components/Paginate.astro";
 
 const { page } = Astro.params;
 
@@ -27,37 +29,10 @@ export const getStaticPaths = async () => {
 	<section class="container mx-auto">
 		<h1 class="text-4xl text-center py-6 text-white">Rick and Morty Characters</h1>
 
-		<div class="flex justify-between py-6">
-			{
-				Number(page) > 1 ? (
-					<a href={`/page/${Number(page) - 1}`} class="text-[#8c90a5] text-sm">
-						{" "}
-						Previous{" "}
-					</a>
-				) : (
-					<p class="text-[#8c90a5] text-sm">Previous</p>
-				)
-			}
-			<p class="text-[#8c90a5] text-sm">Page: {page}</p>
-			<a href={`/page/${Number(page) + 1}`} class="text-[#8c90a5] text-sm"> Next </a>
-		</div>
+		<Paginate numberPage={page} />
 
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-			{
-				data.results.map((character: Character) => (
-					<a
-						href={`/characters/${character.id}`}
-						class="rounded-2xl border-[1px] border-[#8c90a5] hover:translate-y-[-0.5rem] duration-200">
-						<article class="flex flex-col p-2 gap-2 ">
-							<img src={character.image} alt={character.name} class="rounded-xl" transition:name={`card-${character.id}`} />
-							<div class="w-full flex justify-between items-center">
-								<h2 class="font-bold text-white">{character.name}</h2>
-								<p class="text-[#8c90a5] text-sm">id: {character.id}</p>
-							</div>
-						</article>
-					</a>
-				))
-			}
+			{data.results.map((character: Character) => <Card id={character.id} image={character.image} name={character.name} />)}
 		</div>
 	</section>
 </Layout>

@@ -1,0 +1,39 @@
+---
+export interface Props {
+	numberPage: string;
+}
+
+const { numberPage } = Astro.props;
+---
+
+<div class="flex justify-between items-center py-6">
+	{
+		Number(numberPage) > 1 ? (
+			<a
+				href={`/page/${Number(numberPage) - 1}`}
+				class="w-20 hover:bg-transparent hover:text-white border-[1px] border-[#8c90a5] hover:border-white font-bold text-sm duration-300 bg-[#8c90a5] text-center p-2 rounded-lg">
+				{" "}
+				Previous{" "}
+			</a>
+		) : (
+			<p class="w-20 hover:bg-transparent hover:text-white border-[1px] border-[#8c90a5] hover:border-white duration-300 font-bold text-sm bg-[#8c90a5] text-center p-2 rounded-lg cursor-pointer">
+				Previous
+			</p>
+		)
+	}
+	<p class="text-[#8c90a5] text-sm">Page: {numberPage}</p>
+	{
+		Number(numberPage) < 42 ? (
+			<a
+				href={`/page/${Number(numberPage) + 1}`}
+				class="w-20 hover:bg-transparent hover:text-white border-[1px] border-[#8c90a5] hover:border-white duration-300 font-bold text-sm bg-[#8c90a5] text-center p-2 rounded-lg">
+				{" "}
+				Next{" "}
+			</a>
+		) : (
+			<p class="w-20 hover:bg-transparent hover:text-white border-[1px] border-[#8c90a5] hover:border-white duration-300 font-bold text-sm bg-[#8c90a5] text-center p-2 rounded-lg cursor-pointer">
+				Next
+			</p>
+		)
+	}
+</div>

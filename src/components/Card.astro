@@ -1,0 +1,19 @@
+---
+export interface Props {
+	id: number;
+	image: string;
+	name: string;
+}
+
+const { id, image, name } = Astro.props;
+---
+
+<a href={`/characters/${id}`} class="rounded-2xl border-[1px] border-[#8c90a5] hover:translate-y-[-0.5rem] duration-200">
+	<article class="flex flex-col p-2 gap-2">
+		<img src={image} alt={name} class="rounded-xl" transition:name={`card-${id}`} />
+		<div class="w-full flex justify-between items-center">
+			<h2 class="font-bold text-white">{name}</h2>
+			<p class="text-[#8c90a5] text-sm">id: {id}</p>
+		</div>
+	</article>
+</a>
